@@ -5,19 +5,20 @@ import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
-import com.heroku.java.model.GroceryItem;
+import com.heroku.java.model.Aluno;
 
-public interface ItemRepository extends MongoRepository<GroceryItem, String> {
+public interface IAlunoRepository extends MongoRepository<Aluno, String>{
     
     @Query("{name:'?0'}")
-    GroceryItem findItemByName(String name);
+    Aluno findItemByName(String name);
+
+    @Query("{id:'?0'}")
+    Aluno getById(String id);
 
     
-    
     @Query(value="{category:'?0'}", fields="{'name' : 1, 'quantity' : 1}")
-    List<GroceryItem> findAll(String category);
+    List<Aluno> findAll(String category);
     
 
     public long count();
-
 }
