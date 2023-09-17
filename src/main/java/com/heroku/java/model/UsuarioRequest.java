@@ -7,7 +7,6 @@ public class UsuarioRequest {
     public String Nome;
 
     public String Sobrenome;
-    public String DataNascimento;
     public String Celular;
 
     public String Email;
@@ -16,7 +15,6 @@ public class UsuarioRequest {
     public String Senha;
     public String Tia;
     public TipoPermissao Permissao;
-    public String CPF;
 
     public String getNome() {
         return Nome;
@@ -32,14 +30,6 @@ public class UsuarioRequest {
 
     public void setSobrenome(String sobrenome) {
         Sobrenome = sobrenome;
-    }
-
-    public String getDataNascimento() {
-        return DataNascimento;
-    }
-
-    public void setDataNascimento(String dataNascimento) {
-        DataNascimento = dataNascimento;
     }
 
     public String getCelular() {
@@ -90,11 +80,4 @@ public class UsuarioRequest {
         Permissao = permissao;
     }
 
-    public String getCPF() {
-        return CPF;
-    }
-
-    public void setCPF(String cPF) {
-        CPF = cPF;
-    }
 }

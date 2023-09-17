@@ -3,8 +3,6 @@ package com.heroku.java.util;
 
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.heroku.java.enuns.TipoPermissao;
 import com.heroku.java.enuns.TipoRole;
 import com.heroku.java.model.Bibliotecario;

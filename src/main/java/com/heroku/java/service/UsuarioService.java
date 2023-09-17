@@ -2,6 +2,7 @@ package com.heroku.java.service;
 
 import java.util.HashMap;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,23 +13,23 @@ import com.heroku.java.model.Usuario;
 import com.heroku.java.model.UsuarioRequest;
 import com.heroku.java.repository.interfaces.IContaRepository;
 
-@Service
+@Component
 public class UsuarioService {
-    // private final IContaRepository _contaRepository;
+     private final IContaRepository _contaRepository;
 
-    // public UsuarioService(IContaRepository contaRepository) {
-    //     _contaRepository = contaRepository;
-    // }
+     public UsuarioService(IContaRepository contaRepository) {
+         _contaRepository = contaRepository;
+     }
 
-    // public void VerificarContaExiste(UsuarioRequest request) {
-    //     if (buscarPorEmail(request.getEmail()) != null)
-    //         throw new IllegalArgumentException("O email fornecido já em está em uso. Por favor, escolha outro email.");
-    //     if (buscarPorTia(request.getTia()) != null)
-    //         throw new IllegalArgumentException("O tia fornecido já está em uso. Por favor, escolha outro tia.");
-    //     if (buscarPorcelular(request.getCelular()) != null)
-    //         throw new IllegalArgumentException(
-    //                 "O número de celular fornecido já está em uso. Por favor, informe outro número.");
-    // }
+     public void VerificarContaExiste(UsuarioRequest request) {
+         if (buscarPorEmail(request.getEmail()) != null)
+             throw new IllegalArgumentException("O email fornecido já em está em uso. Por favor, escolha outro email.");
+      //   if (buscarPorTia(request.getTia()) != null)
+       //      throw new IllegalArgumentException("O tia fornecido já está em uso. Por favor, escolha outro tia.");
+         if (buscarPorcelular(request.getCelular()) != null)
+             throw new IllegalArgumentException(
+                     "O número de celular fornecido já está em uso. Por favor, informe outro número.");
+     }
 
     
     // public void VerificarContaExiste(UsuarioRequest request, String id) {
@@ -42,39 +43,39 @@ public class UsuarioService {
     //                 "O número de celular fornecido já está em uso. Por favor, informe outro número.");
     // }
 
-    // public ResponseBase Login(LoginRequest request, Conta conta) {
-    //     if (!verificarSenha(request, conta)) {
-    //         throw new IllegalArgumentException("Senha inválida");
-    //     }
-    //     Map<String, Object> response = new HashMap<>();
-    //     response.put("contaId", conta.getId());
-    //     response.put("role", conta.getRole().getNome());
-    //     return new ResponseBase(true, "Ok", response);
-    // }
+     public ResponseBase Login(LoginRequest request, Conta conta) {
+         if (!verificarSenha(request, conta)) {
+             throw new IllegalArgumentException("Senha inválida");
+         }
+         Map<String, Object> response = new HashMap<>();
+         response.put("contaId", conta.getId());
+         response.put("role", conta.getRole().getNome());
+         return new ResponseBase(true, "Ok", response);
+     }
 
-    // private Conta buscarPorEmail(String email) {
-    //     return _contaRepository.getByKey("Email", email);
-    // }
+     private Conta buscarPorEmail(String email) {
+         return _contaRepository.findByEmail(email);
+     }
 
     // private Conta buscarPorTia(String tia) {
     //     if (tia == null)
     //         return null;
-    //     return _contaRepository.getByKey("Tia", tia);
+    //    return _contaRepository.getBy("Tia", tia);
     // }
 
-    // private Conta buscarPorcelular(String celular) {
-    //     return _contaRepository.getByKey("Celular", celular);
-    // }
+    private Conta buscarPorcelular(String celular) {
+        return _contaRepository.findByCel(celular);
+    }
 
-    // public Conta createConta(UsuarioRequest request, Usuario usuario) {
-    //     var conta = new Conta(request.getRole(), request.getCelular(), request.getEmail(), request.getSenha(), usuario);
-    //     conta.generateSenha();
-    //     return conta;
-    // }
+  public Conta createConta(UsuarioRequest request, Usuario usuario) {
+       var conta = new Conta(request.getRole(), request.getCelular(), request.getEmail(), request.getSenha(), usuario);
+       conta.generateSenha();
+       return conta;
+   }
 
-    // private boolean verificarSenha(LoginRequest request, Conta conta) {
-    //     return conta.validarSenha(request.Senha, request.Email);
-    // }
+   private boolean verificarSenha(LoginRequest request, Conta conta) {
+       return conta.validarSenha(request.Senha, request.Email);
+   }
 
     // // cria um novo bibliotecario
     // // public ResponseBase CriarUsuario(UsuarioRequest request) {

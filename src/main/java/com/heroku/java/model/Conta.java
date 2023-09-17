@@ -76,6 +76,11 @@ public class Conta extends Base{
         this.setSenha(senha);
     }
 
+    public boolean validarSenha(String senha, String email) {
+        var senhaReq = UsuarioUtil.CriptografarSenha(senha, email);
+        return senhaReq.equals(this.getSenha());
+    }
+
     public void setSenha(String Senha) {
         // Verifica se Senha é nula ou em branco antes de atribuir
         if (Senha == null || Senha.isBlank()) {

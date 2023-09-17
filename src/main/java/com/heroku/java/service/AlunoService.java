@@ -1,5 +1,6 @@
 package com.heroku.java.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.heroku.java.model.Aluno;
@@ -11,29 +12,30 @@ import com.heroku.java.repository.interfaces.IContaRepository;
 import com.heroku.java.service.intefaces.IUsuarioService;
 
 @Service
-public class AlunoService{
-    private final IAlunoRepository alunoRepository;
-    private final IContaRepository contaRepository;
+public class AlunoService extends UsuarioService implements IUsuarioService{
 
-    public AlunoService(IAlunoRepository alunoRepository, IContaRepository contaRepository) {
-      //  super(contaRepository);
-        this.alunoRepository = alunoRepository;
-        this.contaRepository = contaRepository;
+    private final  IAlunoRepository _alunoRepository;
+     private final IContaRepository _contaRepository;
+
+    public AlunoService(IAlunoRepository alunoRepository,IContaRepository contaRepository){
+        super(contaRepository);
+        _alunoRepository = alunoRepository;
+        _contaRepository = contaRepository;
+
     }
-
-    // public ResponseBase CriarUsuario(UsuarioRequest request, String email) {
-    //     try {
-    //         var aluno = createAluno(request, email);
-    //         var conta = createConta(request, aluno);
-    //         VerificarContaExiste(request);
-    //         this.alunoRepository.save(aluno);
-    //         this.contaRepository.save(conta);
-    //         return new ResponseBase().Sucesso();
-    //     } catch (Exception ex) {
-    //         // Em caso de erro, criar uma resposta de falha
-    //         return new ResponseBase(false, "Erro ao criar o usuário: " + ex.getMessage());
-    //     }
-    // }
+     public ResponseBase CriarUsuario(UsuarioRequest request, String email) {
+         try {
+             var aluno = createAluno(request, email);
+             var conta = createConta(request, aluno);
+             VerificarContaExiste(request);
+             _alunoRepository.save(aluno);
+             _contaRepository.save(conta);
+             return new ResponseBase().Sucesso();
+         } catch (Exception ex) {
+         //     Em caso de erro, criar uma resposta de falha
+             return new ResponseBase(false, "Erro ao criar o usuário: " + ex.getMessage());
+         }
+     }
 
     private Aluno createAluno(UsuarioRequest request, String email) {
         var aluno = new Aluno();
