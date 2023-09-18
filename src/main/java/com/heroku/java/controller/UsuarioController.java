@@ -5,13 +5,7 @@ import java.util.List;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +19,7 @@ import com.heroku.java.service.UsuarioServiceFactory;
 import com.heroku.java.util.ValidatorsUtil;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping(value="/usuario")
 public class UsuarioController {
 
@@ -51,7 +46,7 @@ public List<Conta> getAllUsers() {
             // Primeiro, verifique se a conta existe com base no email
             System.out.println("kkkk"+ request.getEmail());
             var conta = _contaRepository.findByEmail(request.getEmail());
-            
+
             if (conta == null) {
                 
                 return ResponseEntity.badRequest().body("Usuário não encontrado");
