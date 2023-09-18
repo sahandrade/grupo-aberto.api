@@ -2,7 +2,7 @@ package com.heroku.java.repository.interfaces;
 
 import java.util.List;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -31,12 +31,10 @@ public interface IContaRepository extends MongoRepository<Conta, String>{
     public long count();
 
 
-    Page<Conta> findAllPage(Pageable pageable);
+    //Page<Conta> findAllPage(Pageable pageable);
 
      @Query(value="{nome:'?0'}")
-    Page<Conta> findByNomeContaining(String nome, Pageable pageable);
+    Page<Conta> findByNomeContaining(String nome, Pageable pagingSort);
   
-         @Query(value="{nome:'?0'}")
 
-    List<Conta> findByNomeContaining(String nome, Sort sort);
 }
