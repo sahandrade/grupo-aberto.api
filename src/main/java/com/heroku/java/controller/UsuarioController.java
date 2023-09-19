@@ -19,8 +19,7 @@ import com.heroku.java.service.UsuarioServiceFactory;
 import com.heroku.java.util.ValidatorsUtil;
 
 @RestController
-@CrossOrigin(origins = "*")
-@RequestMapping(value="/usuario")
+@RequestMapping(value = "/usuario")
 public class UsuarioController {
 
     @Autowired
@@ -32,28 +31,20 @@ public class UsuarioController {
     @Autowired
     UsuarioServiceFactory _usuarioServiceFactory;
 
-    @GetMapping(value="/hello")
-    public String hello(){
-        return "hello";
-    }
-    @GetMapping(value="")
-public List<Conta> getAllUsers() {
-	return _contaRepository.findAll();
-}
-  @PostMapping(value = "/login") // Defina o caminho correto aqui
+    @PostMapping(value = "/login") // Defina o caminho correto aqui
     public ResponseEntity<?> Login(@RequestBody LoginRequest request) {
         try {
             // Primeiro, verifique se a conta existe com base no email
-            System.out.println("kkkk"+ request.getEmail());
+            System.out.println("kkkk" + request.getEmail());
             var conta = _contaRepository.findByEmail(request.getEmail());
 
             if (conta == null) {
-                
+
                 return ResponseEntity.badRequest().body("Usuário não encontrado");
             }
 
-
-            // Agora que temos a conta, crie o serviço de usuário com base na função/role da conta
+            // Agora que temos a conta, crie o serviço de usuário com base na função/role da
+            // conta
             var _service = _usuarioServiceFactory.criarUsuarioService(conta.getRole());
 
             // Chame o método de login do serviço de usuário
@@ -67,7 +58,7 @@ public List<Conta> getAllUsers() {
         }
     }
 
-@PostMapping(value = "/criar")
+    @PostMapping(value = "/criar")
     public ResponseEntity<?> CadastrarUsuario(@RequestHeader("ContaId") String ContaId,
             @RequestBody UsuarioRequest request) {
 
@@ -86,11 +77,18 @@ public List<Conta> getAllUsers() {
             return ResponseEntity.badRequest().body("Erro: " + e.getMessage());
         }
     }
-    @GetMapping(value = "/criar")
-public Conta addNewUsers() {
-    System.out.println("Saving user.");
-	return _contaRepository.save(new Conta(TipoRole.ALUNO, "Whole Wheat Biscuit", "Whole Wheat Biscuit", null, null));
 
-}
     
+    @GetMapping(value = "")
+    public List<Conta> getAllUsers() {
+        return _contaRepository.findAll();
+    }
+
+    @GetMapping(value = "/{id}")
+    public Conta BuscarPorId(@RequestHeader("ContaId") String ContaId,
+    @RequestParam("id") String id) {
+        System.out.println("aqui");
+        return _contaRepository.getById(id);
+    }
+
 }

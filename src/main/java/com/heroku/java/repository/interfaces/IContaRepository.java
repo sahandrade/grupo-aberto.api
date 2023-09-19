@@ -13,7 +13,7 @@ public interface IContaRepository extends MongoRepository<Conta, String>{
     @Query("{email:'?0'}")
     Conta findByEmail(String email);
 
-    @Query("{id:'?0'}")
+    @Query(value="{id:'?0'}")
     Conta getById(String id);
 
     @Query("{tia:'?0'}")

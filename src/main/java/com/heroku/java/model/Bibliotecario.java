@@ -1,6 +1,5 @@
 package com.heroku.java.model;
 
-import org.bson.Document;
 
 import com.heroku.java.enuns.TipoPermissao;
 
