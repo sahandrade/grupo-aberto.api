@@ -17,16 +17,11 @@ public class CorsConfig implements WebMvcConfigurer {
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Collections.singletonList("*")); // Allow requests from all sources
-
-        // You can configure other CORS settings as needed
-        // configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-        // configuration.setAllowCredentials(true);
-        // configuration.addAllowedHeader("Authorization");
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
+        @Override
+        public void addCorsMappings(CorsRegistry registry) {
+            registry.addMapping("/**")
+                    .allowedOrigins("*") // Allow requests from any origin
+                    .allowedMethods("GET", "POST", "PUT", "DELETE") // Allowed HTTP methods
+                    .allowedHeaders("*"); // Allowed headers
 }}
 
