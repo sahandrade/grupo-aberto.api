@@ -26,9 +26,6 @@ public class LivroController {
         return livroRepository.findAll();
     }
 
-    // @PostMapping(value="")
-    // public SomeData getMethodName(@RequestParam String param) {
-    //     return new SomeData();
-    // }
+
     
 }

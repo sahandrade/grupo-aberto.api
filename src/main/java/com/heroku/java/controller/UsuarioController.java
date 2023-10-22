@@ -78,11 +78,6 @@ public class UsuarioController {
         }
     }
 
-    
-    @GetMapping(value = "")
-    public List<Conta> getAllUsers() {
-        return _contaRepository.findAll();
-    }
 
     @GetMapping(value = "/{id}")
     public Conta BuscarPorId(@RequestHeader("ContaId") String ContaId,
